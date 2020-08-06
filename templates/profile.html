@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block body_content %}
+
+<div class="mx-5 my-2">
+  <h3>User Profile</h3>
+</div>
+
+<hr>
+
+
+<h3>Username: <span style="color:green">{{request.user.username}}</span></h3>
+<h3>Email: <span style="color:green">{{request.user.email}}</span></h3>
+<h3>Is Staff: <span style="color:green">{{request.user.is_staff}}</span></h3>
+
+
+
+{% endblock body_content %}

@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load el_pagination_tags %}
+{% block extra_head_links %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock extra_head_links %}
+{% block body_content %}
+<h2><a href="{%url 'app:user_create'%}">Create user</a></h2>
+{% paginate users %}
+{% if errors %}
+
+<span style="color: red;">{{errors}}</span>
+
+{% endif %}
+<div class="container table-responsive-sm">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Is Active</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{user.username}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.is_active}}</td>
+                <td><a class="btn btn-info" href="{% url 'app:user_update' user.id %}">Update</a> <a class="btn btn-info delete_user" href="{% url 'app:user_delete' user.id %}">Delete</a> <a class="btn btn-info" href="{% url 'app:user_activate' user.id %}">{% if user.is_active %}
+                        Deactivate
+                        {% else %}
+                        Activate
+                        {% endif %}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="container">
+    <ul class="pagination justify-content-center">
+        {% show_pages %}
+    </ul>
+</div>
+{% endblock body_content %}
+{% block extra_js %}
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD35gFFIoFOgLgoSo1nkuq4ur4rEir5tTE&libraries=places"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+<script>
+$(".clear").click(function(e) {
+    $('input[type="text"]').val("");
+});
+$(function() {
+    $(".delete_user").click(function(e) {
+        if (confirm("Are you sure you want to Delete user?")) {
+            console.log('confirm')
+        } else {
+            console.log('cancel')
+            $(".delete_user").attr("href", "{%url 'app:user_admin'%}");
+        }
+    })
+
+});
+</script>
+{% endblock extra_js %}
