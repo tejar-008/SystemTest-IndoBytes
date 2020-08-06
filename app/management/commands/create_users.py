@@ -9,7 +9,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         try:
-            user = User.objects.create(username=admin, email="admin@gmail.com", is_superuser=True)
+            user = User.objects.create(username="admin", email="admin@gmail.com", is_superuser=True, is_staff=True)
             user.set_password("Qwerty@12")
             user.save()
         except:
