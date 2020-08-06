@@ -10,7 +10,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         try:
             user = User.objects.create(username=admin, email="admin@gmail.com", is_superuser=True)
-            user.set_password("qwerty@12")
+            user.set_password("Qwerty@12")
             user.save()
         except:
             pass
@@ -18,7 +18,7 @@ class Command(BaseCommand):
             username = "user" + str(num)
             try:
                 user = User.objects.create(username=username, email=username + "@gmail.com")
-                user.set_password("qwerty@12")
+                user.set_password("Qwerty@12")
                 user.save()
             except:
                 pass

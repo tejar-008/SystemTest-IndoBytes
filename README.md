@@ -56,6 +56,7 @@ This project contains the following modules.
     ```sh
       $ python manage.py create_users
     ```
+    * Admin Credentials email - "admin@gmail.com", password - "Qwerty@12"
 * Dashboard
   * "http://localhost:8000/dashboard/"
 
